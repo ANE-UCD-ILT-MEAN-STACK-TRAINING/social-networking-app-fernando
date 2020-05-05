@@ -15,7 +15,8 @@ export class PostListComponent implements OnInit, OnDestroy {
 
   private postSubscription: Subscription;
 
-  /*  posts = [
+  /*  Left here for reference
+      posts = [
       {title: 'First Post', content: 'This is the first post content'},
       {title: 'Second Post', content: 'This is the second post content'},
       {title: 'Third Post', content: 'This is the third post content'}
