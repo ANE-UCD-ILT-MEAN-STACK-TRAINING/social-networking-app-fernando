@@ -1,16 +1,12 @@
-//create server var
-var express = require("express");
-var app = new express();
+const http = require("http");
+const app = require('./backend/app');
 
 const port = process.env.PORT || "3000";
+app.set("port", port);
 
-app.get("/", function(req, res) {
-  res.send("Hello from Express");
-});
+const server = http.createServer(app);
+console.log("Running on port " + port);
 
-app.listen(port, function () {
-  console.log('Running on port ' + port);
-});
-
+server.listen(port);
 
 
