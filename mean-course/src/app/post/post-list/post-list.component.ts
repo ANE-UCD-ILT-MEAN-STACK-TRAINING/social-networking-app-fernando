@@ -22,10 +22,10 @@ export class PostListComponent implements OnInit, OnDestroy {
       {title: 'Third Post', content: 'This is the third post content'}
     ] */
 
-  @Input() posts: Post[] = [];
+  posts: Post[] = [];
 
-  ngOnInit(): void {
-    this.posts = this.postService.getPost();
+  ngOnInit() {
+    this.postService.getPost();
     this.postSubscription = this.postService.getPostUpdateListener().subscribe((postsReceived: Post[]) => {
       this.posts = postsReceived;
     });

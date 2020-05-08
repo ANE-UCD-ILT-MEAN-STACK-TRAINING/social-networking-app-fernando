@@ -1,19 +1,36 @@
-const express = require("express"); //comments for later
-const app = express(); // more comments
+const express = require("express");
+const app = express();
 
 app.use((req, res, next) => {
-  console.log("first middle where");
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PATCH, DELETE, OPTIONS"
+  );
   next();
 });
 
-app.use((req, res, next) => {
-  console.log("second middle where");
-  next();
-});
-
-app.use((req, res, next) => {
-  res.send("Hello from express, done some changes");
-
+app.use("/api/posts", (req, res, next) => {
+  const posts = [
+    {
+      id: "fadf12421l",
+      title: "First server-side post",
+      content: "This is coming from the server",
+    },
+    {
+      id: "ksajflaj132",
+      title: "Second server-side post",
+      content: "This is coming from the server!",
+    },
+  ];
+  res.status(200).json({
+    message: "Posts fetched succesfully!",
+    posts: posts,
+  });
 });
 
 module.exports = app;
