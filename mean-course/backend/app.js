@@ -1,5 +1,11 @@
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
+
+// bodyParser.json() -> this will tell only to process json type data from the request body
+app.use(bodyParser.json());
+//another example showing body-parser can process other types of body other than json
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -14,7 +20,18 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/posts", (req, res, next) => {
+app.post("/api/post", (req, res, next) => {
+  const post = req.body;
+
+  res.status(201).json({
+    message: "Post added successfully",
+  })
+});
+
+
+
+
+app.get("/api/posts", (req, res, next) => {
   const posts = [
     {
       id: "fadf12421l",
