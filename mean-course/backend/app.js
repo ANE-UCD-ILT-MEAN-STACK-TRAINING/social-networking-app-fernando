@@ -1,6 +1,20 @@
 const express = require("express");
-const app = express();
 const bodyParser = require("body-parser");
+const Post = require('./models/post');
+
+const mongoose = require('mongoose');
+
+const app = express();
+
+mongoose
+//  .connect("mongodb+srv://fernando:Crosstown74@cluster0-wq0b6.mongodb.net/test?retryWrites=true&w=majority")
+  .connect('mongodb://localhost:27017/MyPosts?readPreference=primary&appname=MongoDB%20Compass%20Community&ss=false', {useNewUrlParser: true})
+  .then(() => {
+    console.log("Connceted to database");
+  })
+  .catch(() => {
+    console.log("Conncetion failed");
+  });
 
 // bodyParser.json() -> this will tell only to process json type data from the request body
 app.use(bodyParser.json());
@@ -21,8 +35,14 @@ app.use((req, res, next) => {
 });
 
 app.post("/api/post", (req, res, next) => {
-  const post = req.body;
+    const post = new Post({
+      title: req.body.title,
+      content: req.body.content,
+    });
 
+    post.save();
+
+  console.log(post);
   res.status(201).json({
     message: "Post added successfully",
   })
