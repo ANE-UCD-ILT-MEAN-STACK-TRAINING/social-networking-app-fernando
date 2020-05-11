@@ -14,7 +14,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   }
 
   private postSubscription: Subscription;
-
+  isLoading = false;
   /*  Left here for reference
       posts = [
       {title: 'First Post', content: 'This is the first post content'},
@@ -25,8 +25,10 @@ export class PostListComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
 
   ngOnInit() {
-    this.postService.getPost();
+    this.isLoading = true;     // spinner
+    this.postService.getPosts();
     this.postSubscription = this.postService.getPostUpdateListener().subscribe((postsReceived: Post[]) => {
+      setTimeout(() => {this.isLoading = false}, 4000);
       this.posts = postsReceived;
     });
   }

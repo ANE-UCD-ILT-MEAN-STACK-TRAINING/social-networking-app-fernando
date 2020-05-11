@@ -13,26 +13,34 @@ export class PostService {
 
   constructor(private http: HttpClient) { }
 
-  // getPost() {
-  //   this.http
-  //     .get<{ message: string; posts: any }>(
-  //       'http://localhost:3000/api/posts')
-  //     .pipe(
-  //       map((postData) => {
-  //       return postData.posts.map((post) => {
-  //         return {
-  //           title: post.title,
-  //           content: post.content,
-  //           id: post._id,
-  //         };
-  //       });
-  //   })
-  // )
-  //     .subscribe(transfromedPosts => {
-  //       this.posts = transfromedPosts;
-  //       this.postsUpdated.next([...this.posts]);
-  //     });
-  // }
+  getPosts() {
+    this.http
+      .get<{ message: string; posts: any }>(
+        'http://localhost:3000/api/posts')
+      .pipe(
+        map((postData) => {
+        return postData.posts.map((post) => {
+          return {
+            title: post.title,
+            content: post.content,
+            id: post._id,
+          };
+        });
+    })
+  )
+      .subscribe({next: (transfromedPosts) => {
+          this.posts = transfromedPosts;
+          this.postsUpdated.next([...this.posts]);
+        }});
+  }
+
+
+
+  getPost(id: string) {
+    return {...this.posts.find(p => {
+        return p.id === id;
+      })};
+  }
 
 
   getPostUpdateListener() {
