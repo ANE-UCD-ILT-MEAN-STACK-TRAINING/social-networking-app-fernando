@@ -7,10 +7,10 @@ import { Post } from './post/post.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'mean-course';
-
-  storedPosts: Post[] = [];
-  onPostAdded(post) {
-    this.storedPosts.push(post);
-  }
+  // title = 'mean-course';
+  //
+  // storedPosts: Post[] = [];
+  // onPostAdded(post) {
+  //   this.storedPosts.push(post);
+  // }
 }

@@ -1,7 +1,7 @@
 import {Component, OnInit, Input, OnDestroy} from '@angular/core';
-import { Subscription } from 'rxjs';
-import { Post } from '../post.model';
-import { PostService} from '../post.service';
+import {Subscription} from 'rxjs';
+import {Post} from '../post.model';
+import {PostService} from '../post.service';
 
 @Component({
   selector: 'app-post-list',
@@ -27,10 +27,11 @@ export class PostListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isLoading = true;     // spinner
     this.postService.getPosts();
-    this.postSubscription = this.postService.getPostUpdateListener().subscribe((postsReceived: Post[]) => {
-      setTimeout(() => {this.isLoading = false}, 4000);
-      this.posts = postsReceived;
-    });
+    this.postSubscription = this.postService.getPostUpdateListener()
+      .subscribe((postsReceived: Post[]) => {
+        setTimeout(() => { this.isLoading = false; }, 2000);
+        this.posts = postsReceived;
+      });
   }
 
   ngOnDestroy(): void {
