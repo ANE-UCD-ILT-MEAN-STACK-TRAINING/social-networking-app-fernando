@@ -16,6 +16,10 @@ input[type="file"] {
   visibility: hidden;
 }
 
+mat-paginator {
+  margin-top: 1rem;
+}
+
 .image-preview {
   height: 5rem;
   margin: 1rem;

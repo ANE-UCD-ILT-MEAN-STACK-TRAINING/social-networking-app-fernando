@@ -9,8 +9,8 @@ const mongoose = require('mongoose');
 const app = express();
 
 mongoose
-//  .connect("mongodb+srv://fernando:Crosstown74@cluster0-wq0b6.mongodb.net/test?retryWrites=true&w=majority")
-  .connect('mongodb://localhost:27017/MyPosts?readPreference=primary&appname=MongoDB%20Compass%20Community&ss=false', {useNewUrlParser: true})
+  .connect("mongodb+srv://fernando:Crosstown74@cluster0-wq0b6.mongodb.net/MyPosts?retryWrites=true&w=majority")
+//  .connect('mongodb://localhost:27017/MyPosts?readPreference=primary&appname=MongoDB%20Compass%20Community&ss=false', {useNewUrlParser: true})
   .then(() => {
     console.log("Connceted to database");
   })

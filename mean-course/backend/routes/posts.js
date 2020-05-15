@@ -54,12 +54,32 @@ router.post("", multer({ storage: storage }).single("image"),
 });
 
 router.get("", (req, res, next) => {
-  Post.find().then((documents) => {
-    res.status(200).json({
-      message: "Post fetched successfully",
-      posts: documents,
-    });
-  });
+  const pageSize = +req.query.pagesize;
+  const currentPage = +req.query.page;
+  let fetchedPosts;
+
+  const postQuery = Post.find();
+  // if input are invalid
+  if (pageSize && currentPage) {
+    postQuery.skip(pageSize * (currentPage - 1)).limit(pageSize);
+  }
+  // Post.find().then((documents) => {
+  //   res.status(200).json({
+  //     message: "Post fetched successfully",
+  //     posts: documents,
+  //   });
+  // });
+  postQuery.find().then((documents) => {
+    fetchedPosts = documents;
+    return Post.count();
+  })
+    .then((count) => {
+      res.status(200).json({
+        message: "Posts fetched successfully!",
+        posts: fetchedPosts,
+        maxPosts: count,
+      })
+    })
 });
 
 router.get("/:id", (req, res, next) => {
@@ -86,13 +106,15 @@ router.put('/:id', multer({storage: storage}).single("image"),
   const post = new Post({
     _id: req.body.id,
     title: req.body.title,
-    content: req.body.content
+    content: req.body.content,
+    imagePath: imagePath,
   });
+  console.log(post);
 
   Post.updateOne({_id:req.params.id}, post)
     .then(updatedPost => {
-      res.status(201).json({
-        message: 'Post Added !!',
+      res.status(200).json({
+        message: 'Post Updated !!',
         postId: updatedPost._id
       });
     });
