@@ -19,7 +19,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
-import {AuthInterceptor} from "./auth/auth-interceptor";
+import {AuthInterceptor} from './auth/auth-interceptor';
 
 @NgModule({
   declarations: [
