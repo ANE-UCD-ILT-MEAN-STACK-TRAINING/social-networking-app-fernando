@@ -5,9 +5,9 @@ const UserController = require('../controllers/user');
 // const User = require('../models/user');
 // const jwt = require('jsonwebtoken');
 
-router.post('/login', UserController.createUser);
+router.post('/login', UserController.userLogin);
 
-router.post('/signup', UserController.userLogin);
+router.post('/signup', UserController.createUser);
 
 //router.post("/signup", (req, res, next) => {
 //   bcrypt.hash(req.body.password, 10)

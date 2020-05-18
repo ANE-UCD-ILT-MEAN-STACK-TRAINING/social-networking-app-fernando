@@ -5,6 +5,8 @@ const Post = require('./models/post');
 const postRoutes = require('./routes/posts');
 const userRoutes = require('./routes/user');
 
+const cors = require('cors');
+
 const mongoose = require('mongoose');
 
 const app = express();
@@ -24,7 +26,7 @@ app.use(bodyParser.json());
 //another example showing body-parser can process other types of body other than json
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/images', express.static(path.join('images')));
+app.use('/images', express.static(path.join('backend/images')));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -38,6 +40,8 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+app.use(cors());
 
 app.use('/api/posts', postRoutes);
 app.use('/api/users', userRoutes);

@@ -27,9 +27,6 @@ export class PostCreateComponent implements OnInit {
   form: FormGroup;
   imagePreview: string;
 
-//  enteredValue = '';
-//  newPost = 'No Content';
-
   title = '';
   content = '';
 
@@ -99,11 +96,6 @@ export class PostCreateComponent implements OnInit {
 
     this.form.reset();
 
-    /*const post: Post = {
-      title: form.value.title,
-      content: form.value.content
-    };
-    this.postCreated.emit(post);*/
   }
 
 }
