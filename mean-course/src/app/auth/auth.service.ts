@@ -58,9 +58,9 @@ export class AuthService {
       password
     };
 
-    this.http.post(BACKEND_URL + 'signup', authData)
+    return this.http.post(BACKEND_URL + 'signup', authData)
       .subscribe(response => {
-        console.log(response);
+    //    console.log(response);
         this.router.navigate(['/']);
       },
         (error) => {
@@ -92,6 +92,8 @@ export class AuthService {
           this.saveAuthData(token, expirationDate, this.userId);
           this.router.navigate(['/']);
         }
+      }, error => {
+        this.authStatusListener.next(false);
       });
   }
 

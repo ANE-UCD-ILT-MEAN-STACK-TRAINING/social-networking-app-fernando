@@ -14,11 +14,14 @@ import {AuthInterceptor} from './auth/auth-interceptor';
 import { AngularMaterialModule } from './angular-material.module';
 import { PostsModule } from './post/posts.module';
 
+import { ErrorInterceptor } from './error-interceptor';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    ErrorComponent,
      ],
   imports: [
     BrowserModule,
@@ -31,8 +34,10 @@ import { PostsModule } from './post/posts.module';
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
-  }],
+  },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
 
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ErrorComponent]
 })
 export class AppModule { }
