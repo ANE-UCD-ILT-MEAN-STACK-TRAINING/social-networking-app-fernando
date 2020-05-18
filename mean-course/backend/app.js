@@ -16,7 +16,7 @@ mongoose
     console.log("Connceted to database");
   })
   .catch(() => {
-    console.log("Conncetion failed");
+    console.log("Connection failed");
   });
 
 // bodyParser.json() -> this will tell only to process json type data from the request body
@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 //another example showing body-parser can process other types of body other than json
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/images', express.static(path.join('backend/images')));
+app.use('/images', express.static(path.join('images')));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
